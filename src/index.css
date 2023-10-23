@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+nav div ul li a:hover,
+nav div ul li a.active {
+    color: #FFA633;
+    transition: color .4s ease;
+}
+
+.mobilenav li a:hover,
+.mobilenav li a.active {
+    color: #FFA633;
+}
