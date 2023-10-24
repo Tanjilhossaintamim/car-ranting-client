@@ -3,6 +3,7 @@ import NavBar from "../components/shared/Navbar/NavBar";
 import Aos from "aos";
 import { useEffect } from "react";
 import Footer from "../components/shared/Footer/Footer";
+import { Toaster } from "react-hot-toast";
 
 const MainLayout = () => {
   useEffect(() => {
@@ -10,6 +11,7 @@ const MainLayout = () => {
   }, []);
   return (
     <div className="font-fira-sans">
+      <Toaster />
       <NavBar />
       <Outlet />
       <Footer />

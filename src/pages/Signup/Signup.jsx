@@ -1,8 +1,15 @@
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userSchema } from "../../utils/schema";
+import { useSignUpMutation } from "../../redux/features/authenication/authenicationApi";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const Signup = () => {
+  const [signUp, { data, isLoading, isError, error, isSuccess }] =
+    useSignUpMutation();
+  const navigate = useNavigate();
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
@@ -13,9 +20,28 @@ const Signup = () => {
       },
       validationSchema: userSchema,
       onSubmit: (values) => {
-        console.log(values);
+        const userData = {
+          email: values.email,
+          password: values.password,
+          is_owner: values.owner,
+        };
+        handelSignup(userData);
       },
     });
+
+  useEffect(() => {
+    if (isError) {
+      const key = Object.keys((error && error.data) || { name: "tamim" })[0];
+      const message = error?.data[key][0];
+      toast.error(message);
+    } else if (isSuccess) {
+      toast.success("account created successfully!");
+      navigate("/login");
+    }
+  }, [isError, error, isSuccess, data, navigate]);
+  const handelSignup = (userData) => {
+    signUp(userData);
+  };
   return (
     <section className="bg-[#FCFBFB] min-h-[50vh] py-20 flex justify-center items-center">
       <div className="max-w-[635px] w-full mx-auto flex justify-center rounded-md items-center px-4 lg:px-0">
@@ -92,6 +118,7 @@ const Signup = () => {
             <input
               type="submit"
               value="Sign UP"
+              disabled={isLoading}
               className="bg-color-black-1 py-2 text-white font-semibold rounded-md cursor-pointer"
             />
           </form>
