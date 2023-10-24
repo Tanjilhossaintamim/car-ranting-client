@@ -12,7 +12,8 @@ export default {
       colors: {
         'color-black': '#2f2f2f',
         'color-black-1': '#201f1d',
-        'color-orange': '#FFA633'
+        'color-orange': '#FFA633',
+        'color-gray': '#878787',
       }
     },
   },
