@@ -1,12 +1,28 @@
+import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+import { signInSchema } from "../../utils/schema";
 
 const Login = () => {
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        email: "",
+        password: "",
+      },
+      validationSchema: signInSchema,
+      onSubmit: (values) => {
+        console.log(values);
+      },
+    });
   return (
     <section className="bg-[#FCFBFB] min-h-[50vh] py-20 flex justify-center items-center">
       <div className="max-w-[635px] w-full mx-auto flex justify-center rounded-md items-center px-4 lg:px-0">
         <div className="bg-white shadow-sm w-full rounded-md p-7">
           <h1 className="text-[28px] font-bold">Sign In</h1>
-          <form className="flex flex-col space-y-4 mt-8">
+          <form
+            className="flex flex-col space-y-4 mt-8"
+            onSubmit={handleSubmit}
+          >
             <div className="flex flex-col space-y-2">
               <label htmlFor="email" className="font-semibold text-[#2f2f2f]">
                 Email <small className="text-red-600">*</small>
@@ -16,7 +32,13 @@ const Login = () => {
                 name="email"
                 id="email"
                 className="bg-[#fcfbfb] p-3 border border-[#f4f4f4] rounded-md text-sm text-color-black-1 outline-none focus:bg-white"
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
+              {touched.email && errors.email && (
+                <small className="text-red-500">{errors.email}</small>
+              )}
             </div>
             <div className="flex flex-col space-y-2">
               <label htmlFor="email" className="font-semibold text-[#2f2f2f]">
@@ -27,11 +49,15 @@ const Login = () => {
                 name="password"
                 id="email"
                 className="bg-[#fcfbfb] p-3 border border-[#f4f4f4] rounded-md text-sm text-color-black-1 outline-none focus:bg-white"
+                value={values.password}
+                onChange={handleChange}
+                onBlur={handleBlur}
               />
+              {touched.password && errors.password && (
+                <small className="text-red-500">{errors.password}</small>
+              )}
             </div>
-            
 
-            
             <input
               type="submit"
               value="Sign In"

@@ -1,4 +1,20 @@
+import { useFormik } from "formik";
+
 const AddCar = () => {
+  const { values, handleBlur, handleChange, handleSubmit } = useFormik({
+    initialValues: {
+      name: "",
+      brand: "",
+      image: "",
+      from: "",
+      to: "",
+      price: "",
+    },
+
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
   return (
     <section className="py-10 bg-gray-400">
       {/* <!-- component --> */}
@@ -22,7 +38,10 @@ const AddCar = () => {
               {/* <!-- Col --> */}
               <div className="w-full lg:w-7/12 bg-white p-5 rounded-lg lg:rounded-l-none">
                 <h3 className="pt-4 text-2xl text-center">Add Car</h3>
-                <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+                <form
+                  className="px-8 pt-6 pb-8 mb-4 bg-white rounded"
+                  onSubmit={handleSubmit}
+                >
                   <div className="mb-4 md:flex md:justify-between">
                     <div className="mb-4 md:mr-2 md:mb-0">
                       <label
@@ -37,6 +56,9 @@ const AddCar = () => {
                         name="name"
                         type="text"
                         placeholder="Enter Car Name"
+                        value={values.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                         required
                       />
                     </div>
@@ -53,6 +75,9 @@ const AddCar = () => {
                         type="text"
                         name="brand"
                         placeholder="Brand Name"
+                        value={values.brand}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                         required
                       />
                     </div>
@@ -70,6 +95,9 @@ const AddCar = () => {
                       name="image"
                       type="url"
                       placeholder="Enter Your Car Image Url"
+                      value={values.image}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                       required
                     />
                   </div>
@@ -85,6 +113,9 @@ const AddCar = () => {
                         name="from"
                         className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow  focus:outline-none focus:shadow-outline"
                         required
+                        value={values.from}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                       >
                         <option value="" hidden>
                           Please Select
@@ -102,9 +133,12 @@ const AddCar = () => {
                         Service Area To
                       </label>
                       <select
-                        name="from"
+                        name="to"
                         className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow  focus:outline-none focus:shadow-outline"
                         required
+                        value={values.to}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                       >
                         <option value="" hidden>
                           Please Select
@@ -124,9 +158,12 @@ const AddCar = () => {
                       <input
                         className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                         id="img"
-                        name="pice"
+                        name="price"
                         type="number"
                         placeholder="price"
+                        value={values.price}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                         required
                       />
                     </div>
