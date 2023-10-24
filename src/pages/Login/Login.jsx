@@ -1,8 +1,23 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { signInSchema } from "../../utils/schema";
+import { useLoginMutation } from "../../redux/features/authenication/authenicationApi";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const [login, { data, error, isError, isSuccess }] = useLoginMutation();
+  console.log(data);
+  console.log(error);
+  useEffect(() => {
+    if (isError) {
+      const key = Object.keys(error?.data)[0];
+      const message = error?.data[key];
+      toast.error(message);
+    } else if (isSuccess) {
+      toast.success("successfully logged in !");
+    }
+  }, [error?.data, isError, isSuccess]);
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
@@ -11,7 +26,7 @@ const Login = () => {
       },
       validationSchema: signInSchema,
       onSubmit: (values) => {
-        console.log(values);
+        login({ email: values.email, password: values.password });
       },
     });
   return (
