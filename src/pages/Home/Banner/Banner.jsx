@@ -15,7 +15,7 @@ const Banner = () => {
         }}
         className="hidden lg:block"
       >
-        <div className="w-11/12 mx-auto flex items-center justify-between">
+        <div className="w-11/12 mx-auto flex items-center justify-between" data-aos='fade-down'>
           <div className="lg:w-3/4 flex flex-col space-y-3">
             {/* top heading */}
             <div className="bg-white rounded-3xl py-3 w-fit px-6 text-color-black">

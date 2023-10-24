@@ -1,7 +1,7 @@
 import { AiOutlineSearch } from "react-icons/ai";
 const CarPicker = () => {
   return (
-    <div className="lg:w-3/4 mx-auto bg-white shadow flex items-center rounded-md py-9 lg:absolute top-3/4 right-40">
+    <div className="lg:w-3/4 mx-auto bg-white shadow flex items-center rounded-md py-9 lg:absolute top-3/4 right-40" data-aos="fade-up">
       <form className="w-full lg:w-auto mx-auto flex flex-col lg:flex-row items-center justify-center space-y-4 lg:space-y-0 lg:justify-between lg:space-x-10 flex-wrap">
         <div className="flex flex-col space-y-1 w-3/4 lg:w-auto">
           <p className="text-sm font-bold text-color-black">Destination From</p>
