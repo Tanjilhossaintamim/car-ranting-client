@@ -12,7 +12,7 @@ const CarCard = () => {
   return (
     <div
       className="group/card bg-white rounded-md p-4 cursor-pointer transition-all"
-      data-aos="fade-up"
+      data-aos="zoom-in"
     >
       <div className="relative overflow-hidden rounded-md">
         <img
