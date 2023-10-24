@@ -1,13 +1,18 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import NavLogo from "../../../assets/logo.svg";
 import NavLogoSmall from "../../../assets/logo-small.png";
 import { HiOutlineUser } from "react-icons/hi";
 import { FiLock } from "react-icons/fi";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const NavBar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
+  const location = useLocation();
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[location])
   return (
     <header className="bg-white py-2 sticky top-0 z-50 transition-all duration-150">
       <nav className="hidden lg:flex justify-between items-center h-16 bg-white px-8">
