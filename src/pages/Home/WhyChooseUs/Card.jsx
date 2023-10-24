@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 const Card = ({ img, title, description, color }) => {
   return (
-    <div className="p-4 bg-white shadow rounded-md" data-aos="zoom-in">
+    <div className="p-4 bg-white shadow rounded-md z-10" data-aos="zoom-in">
       <div
         className="py-6 flex justify-center items-center rounded-md"
         style={{ backgroundColor: color }}

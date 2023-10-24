@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 const Work = ({ img, title, description, color }) => {
   return (
-    <div className="lg:w-1/4 mb-4 lg:mb-0 text-center">
+    <div className="lg:w-1/4 mb-4 lg:mb-0 text-center z-20">
       <div
         className={`w-24 h-24 mx-auto rounded-full  flex justify-center items-center`}
         style={{ border: `2px dashed ${color}` }}

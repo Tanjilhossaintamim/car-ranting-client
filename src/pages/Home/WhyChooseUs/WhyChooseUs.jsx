@@ -1,10 +1,11 @@
 import Heading from "../../../components/shared/Heading/Heading";
 import UserCheckimg from "../../../assets/bx-user-check.svg";
+import LeftImg from "../../../assets/choose-left.png";
 import Card from "./Card";
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-20 bg-[#FCFBFB]">
+    <section className="py-20 bg-[#FCFBFB] relative">
       <Heading
         title="Why Choose Us"
         description="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"
@@ -30,6 +31,7 @@ const WhyChooseUs = () => {
           color="#FFA633"
         />
       </div>
+      <img src={LeftImg} alt="" className="absolute top-4 " />
     </section>
   );
 };
