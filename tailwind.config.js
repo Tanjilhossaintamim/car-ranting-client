@@ -14,6 +14,7 @@ export default {
         'color-black-1': '#201f1d',
         'color-orange': '#FFA633',
         'color-gray': '#878787',
+        'color-pest': "#127384"
       }
     },
   },
