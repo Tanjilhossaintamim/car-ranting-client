@@ -6,6 +6,8 @@ import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
 import ExtraProtectedroute from "./ExtraProtectedroute";
 import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
+import BookingList from "../pages/BookingList/BookingList";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
           <PublicRoute>
             <Signup />
           </PublicRoute>
+        ),
+      },
+      {
+        path: "/myBooking",
+        element: (
+          <PrivateRoute>
+            <BookingList />
+          </PrivateRoute>
         ),
       },
     ],

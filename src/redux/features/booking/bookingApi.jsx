@@ -2,6 +2,9 @@ import api from "../api/api";
 
 const bookingApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    getBookings: builder.query({
+      query: () => "/booking",
+    }),
     placeBooking: builder.mutation({
       query: (bookingInfo) => ({
         url: `/booking/`,
@@ -12,4 +15,4 @@ const bookingApi = api.injectEndpoints({
   }),
 });
 
-export const { usePlaceBookingMutation } = bookingApi;
+export const { usePlaceBookingMutation, useGetBookingsQuery } = bookingApi;

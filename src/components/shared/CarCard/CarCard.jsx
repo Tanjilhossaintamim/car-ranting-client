@@ -13,10 +13,13 @@ import { usePlaceBookingMutation } from "../../../redux/features/booking/booking
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const CarCard = ({ car }) => {
+  const { is_loggedin } = useSelector((state) => state.auth);
   const [placeBooking, { isSuccess, isError, error }] =
     usePlaceBookingMutation();
-
+  const navigate = useNavigate();
   const {
     id,
     name,
@@ -37,8 +40,12 @@ const CarCard = ({ car }) => {
     });
     if (phone) {
       const bookingInfo = { car_id: id, phone: phone };
-      console.log(bookingInfo);
-      placeBooking(bookingInfo);
+      if (is_loggedin) {
+        placeBooking(bookingInfo);
+      } else {
+        toast.error("you are not logged in");
+        navigate("/login");
+      }
     }
   };
   useEffect(() => {
