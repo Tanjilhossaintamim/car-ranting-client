@@ -9,9 +9,36 @@ import loveimg from "../../../assets/car-parts-05.svg";
 import sitimg from "../../../assets/car-parts-06.svg";
 import Part from "./Part";
 import PropTypes from "prop-types";
+import { usePlaceBookingMutation } from "../../../redux/features/booking/bookingApi";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 const CarCard = ({ car }) => {
-  const { name, brand, service_area, service_area_to, rent_price, image_url } =
-    car || {};
+  const [placeBooking, { isSuccess, isError, error }] =
+    usePlaceBookingMutation();
+
+  const {
+    id,
+    name,
+    brand,
+    service_area,
+    service_area_to,
+    rent_price,
+    image_url,
+  } = car || {};
+  const handelBooking = () => {
+    placeBooking(id);
+  };
+  useEffect(() => {
+    if (isError) {
+      const key = Object.keys(error?.data)[0];
+      const message = error?.data[key];
+      toast.error(message);
+    } else if (isSuccess) {
+      toast.success("car booked successfully !");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError, isSuccess]);
+
   return (
     <div
       className="group/card bg-white rounded-md p-4 cursor-pointer transition-all"
@@ -59,7 +86,10 @@ const CarCard = ({ car }) => {
           &#2547; {rent_price}
         </span>
       </div>
-      <button className="py-2 w-full bg-color-black-1 text-white mt-4 rounded-md flex justify-center items-center space-x-2 font-semibold text-base group-hover/card:bg-color-pest transition-all">
+      <button
+        className="py-2 w-full bg-color-black-1 text-white mt-4 rounded-md flex justify-center items-center space-x-2 font-semibold text-base group-hover/card:bg-color-pest transition-all"
+        onClick={handelBooking}
+      >
         <AiOutlineCalendar /> <span>Rent Now</span>
       </button>
     </div>
