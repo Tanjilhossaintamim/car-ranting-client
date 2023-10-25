@@ -9,7 +9,7 @@ const api = createApi({
     prepareHeaders: (headers, { endpoint }) => {
       const token = Cookies.get("token");
       headers.set("Content-Type", "application/json");
-      if (!["signUp", "login"].includes(endpoint)) {
+      if (!["signUp", "login", "getCars"].includes(endpoint)) {
         headers.set("Authorization", `JWT ${token}`);
       }
       return headers;
