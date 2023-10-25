@@ -4,6 +4,8 @@ import Home from "../pages/Home/Home/Home";
 import AddCar from "../pages/AddCar/AddCar";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
+import ExtraProtectedroute from "./ExtraProtectedroute";
+import PublicRoute from "./PublicRoute";
 
 const router = createBrowserRouter([
   {
@@ -16,15 +18,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/addCar",
-        element: <AddCar />,
+        element: (
+          <ExtraProtectedroute>
+            <AddCar />
+          </ExtraProtectedroute>
+        ),
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        ),
       },
       {
         path: "/signup",
-        element: <Signup />,
+        element: (
+          <PublicRoute>
+            <Signup />
+          </PublicRoute>
+        ),
       },
     ],
   },
