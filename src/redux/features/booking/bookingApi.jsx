@@ -3,10 +3,10 @@ import api from "../api/api";
 const bookingApi = api.injectEndpoints({
   endpoints: (builder) => ({
     placeBooking: builder.mutation({
-      query: (carId) => ({
+      query: (bookingInfo) => ({
         url: `/booking/`,
         method: "POST",
-        body: JSON.stringify({ car_id: carId }),
+        body: JSON.stringify(bookingInfo),
       }),
     }),
   }),

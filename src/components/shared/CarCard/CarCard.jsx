@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 import { usePlaceBookingMutation } from "../../../redux/features/booking/bookingApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 const CarCard = ({ car }) => {
   const [placeBooking, { isSuccess, isError, error }] =
     usePlaceBookingMutation();
@@ -25,8 +26,20 @@ const CarCard = ({ car }) => {
     rent_price,
     image_url,
   } = car || {};
-  const handelBooking = () => {
-    placeBooking(id);
+  const handelBooking = async () => {
+    const { value: phone } = await Swal.fire({
+      title: "Give Your Phone Number",
+      input: "number",
+      inputLabel: "Enter Your Phone Number",
+      inputPlaceholder: "your active cell phone number",
+      showCancelButton: true,
+      showLoaderOnConfirm: true,
+    });
+    if (phone) {
+      const bookingInfo = { car_id: id, phone: phone };
+      console.log(bookingInfo);
+      placeBooking(bookingInfo);
+    }
   };
   useEffect(() => {
     if (isError) {
@@ -34,7 +47,12 @@ const CarCard = ({ car }) => {
       const message = error?.data[key];
       toast.error(message);
     } else if (isSuccess) {
-      toast.success("car booked successfully !");
+      // toast.success("car booked successfully !");
+      Swal.fire({
+        title: "Success !",
+        icon: "success",
+        text: "Car Booked Successfully !",
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, isSuccess]);
