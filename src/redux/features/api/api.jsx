@@ -5,8 +5,9 @@ const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://car-ranting-server.onrender.com/api",
 
-    prepareHeaders: (headers) => {
+    prepareHeaders: (headers, { getState }) => {
       headers.set("Content-Type", "application/json");
+      headers.set("Authorization", `JWT ${getState().auth.token}`);
       return headers;
     },
   }),

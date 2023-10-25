@@ -1,14 +1,14 @@
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signInSchema } from "../../utils/schema";
 import { useLoginMutation } from "../../redux/features/authenication/authenicationApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const [login, { data, error, isError, isSuccess }] = useLoginMutation();
-  console.log(data);
-  console.log(error);
+  const [login, { error, isError, isSuccess }] = useLoginMutation();
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (isError) {
       const key = Object.keys(error?.data)[0];
@@ -16,8 +16,9 @@ const Login = () => {
       toast.error(message);
     } else if (isSuccess) {
       toast.success("successfully logged in !");
+      navigate("/");
     }
-  }, [error?.data, isError, isSuccess]);
+  }, [error?.data, isError, isSuccess, navigate]);
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
