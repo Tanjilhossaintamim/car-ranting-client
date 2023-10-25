@@ -24,6 +24,8 @@ const Search = () => {
       <CarCard key={car.id} car={car} isRentButton={true} />
     ));
   }
+  document.title = `Dreams Rent |${name}`;
+
   return (
     <section className="py-20 bg-[#F2F7F6]">
       <div

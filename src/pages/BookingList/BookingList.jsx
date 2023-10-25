@@ -88,6 +88,7 @@ const BookingList = () => {
   if (isError) {
     content = <div>Some thing went wrong !</div>;
   }
+  document.title = "Dreams Rent | Booking List";
 
   return (
     <section className="min-h-screen">

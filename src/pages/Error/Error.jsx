@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 const Error = () => {
+  document.title = "Dreams Rent | Error";
+
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="max-w-6xl mx-auto text-center">

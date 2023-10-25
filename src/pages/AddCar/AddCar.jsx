@@ -39,6 +39,8 @@ const AddCar = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, isError]);
+  document.title = "Dreams Rent | Add Car";
+
   return (
     <section className="py-10 bg-gray-400">
       {/* <!-- component --> */}

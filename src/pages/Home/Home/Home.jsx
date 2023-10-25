@@ -5,6 +5,8 @@ import PopularCar from "../PopularLCar/PopularCar";
 import WhyChooseUs from "../WhyChooseUs/WhyChooseUs";
 
 const Home = () => {
+  document.title = "Dreams Rent | Home";
+
   return (
     <div>
       <Banner />

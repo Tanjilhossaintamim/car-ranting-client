@@ -43,6 +43,7 @@ const Signup = () => {
   const handelSignup = (userData) => {
     signUp(userData);
   };
+  document.title = "Dreams Rent | SignUP";
   return (
     <section className="bg-[#FCFBFB] min-h-[50vh] py-20 flex justify-center items-center">
       <div className="max-w-[635px] w-full mx-auto flex justify-center rounded-md items-center px-4 lg:px-0">

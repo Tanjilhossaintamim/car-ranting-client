@@ -43,10 +43,11 @@ const UserCar = () => {
       </div>
     );
   }
+  document.title = "Dreams Rent | User Car";
   return (
     <section className="py-20 bg-[#F2F7F6]">
       <Heading
-        title="Explore Most Popular Cars"
+        title="Your Uploaded Cars"
         description="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"
       />
       <div

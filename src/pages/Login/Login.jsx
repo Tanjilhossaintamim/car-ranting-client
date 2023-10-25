@@ -33,6 +33,8 @@ const Login = () => {
         login({ email: values.email, password: values.password });
       },
     });
+  document.title = "Dreams Rent | Login";
+
   return (
     <section className="bg-[#FCFBFB] min-h-[50vh] py-20 flex justify-center items-center">
       <div className="max-w-[635px] w-full mx-auto flex justify-center rounded-md items-center px-4 lg:px-0">

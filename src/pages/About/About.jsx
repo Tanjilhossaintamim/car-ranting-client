@@ -1,4 +1,6 @@
 const About = () => {
+  document.title = "Dreams Rent | About";
+
   return (
     <section>
       {/* <!-- Container --> */}
