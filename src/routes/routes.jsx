@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import BookingList from "../pages/BookingList/BookingList";
 import Search from "../pages/Search/Search";
 import UserCar from "../pages/UserCar/UserCar";
+import About from "../pages/About/About";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
             <UserCar />
           </ExtraProtectedroute>
         ),
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
     ],
   },

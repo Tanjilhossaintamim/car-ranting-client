@@ -37,6 +37,9 @@ const NavBar = () => {
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
+            <li>
+              <NavLink to="/about">About</NavLink>
+            </li>
             {isOwner && (
               <>
                 <li>
@@ -119,6 +122,11 @@ const NavBar = () => {
               <li className="py-2 text-white border-b border-[#828282]">
                 <NavLink to="/" className="px-2">
                   Home
+                </NavLink>
+              </li>
+              <li className="py-2 text-white border-b border-[#828282]">
+                <NavLink to="/about" className="px-2">
+                  About
                 </NavLink>
               </li>
               {isOwner && (
