@@ -38,9 +38,14 @@ const NavBar = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             {isOwner && (
-              <li>
-                <NavLink to="/addCar">Add Car</NavLink>
-              </li>
+              <>
+                <li>
+                  <NavLink to="/addCar">Add Car</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/myCars">My Car</NavLink>
+                </li>
+              </>
             )}
 
             <li>
@@ -117,11 +122,18 @@ const NavBar = () => {
                 </NavLink>
               </li>
               {isOwner && (
-                <li className="py-2 text-white border-b border-[#828282]">
-                  <NavLink to="/addCar" className="px-2">
-                    Add Car
-                  </NavLink>
-                </li>
+                <>
+                  <li className="py-2 text-white border-b border-[#828282]">
+                    <NavLink to="/addCar" className="px-2">
+                      Add Car
+                    </NavLink>
+                  </li>
+                  <li className="py-2 text-white border-b border-[#828282]">
+                    <NavLink to="/myCars" className="px-2">
+                      My Car
+                    </NavLink>
+                  </li>
+                </>
               )}
 
               <li className="py-2 text-white border-b border-[#828282]">

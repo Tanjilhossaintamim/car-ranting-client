@@ -1,12 +1,13 @@
-import Heading from "../../../components/shared/Heading/Heading";
-import CarCard from "../../../components/shared/CarCard/CarCard";
-import { useGetCarsQuery } from "../../../redux/features/car/carApi";
-import Skeleton from "../../../components/shared/ui/Skeleton";
 import { useState } from "react";
+import CarCard from "../../components/shared/CarCard/CarCard";
+import Heading from "../../components/shared/Heading/Heading";
+import Skeleton from "../../components/shared/ui/Skeleton";
+import { useGetOwnerCarQuery } from "../../redux/features/car/carApi";
 
-const PopularCar = () => {
+const UserCar = () => {
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useGetCarsQuery(page);
+
+  const { data, isLoading } = useGetOwnerCarQuery(page);
 
   let content = null;
   if (isLoading) {
@@ -22,9 +23,7 @@ const PopularCar = () => {
     );
   }
   if (data?.results?.length > 0) {
-    content = data.results.map((car) => (
-      <CarCard key={car.id} car={car} isRentButton={true} />
-    ));
+    content = data.results.map((car) => <CarCard key={car.id} car={car} />);
   }
   return (
     <section className="py-20 bg-[#F2F7F6]">
@@ -60,4 +59,4 @@ const PopularCar = () => {
   );
 };
 
-export default PopularCar;
+export default UserCar;

@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-const CarCard = ({ car }) => {
+const CarCard = ({ car, isRentButton }) => {
   const { is_loggedin } = useSelector((state) => state.auth);
   const [placeBooking, { isSuccess, isError, error }] =
     usePlaceBookingMutation();
@@ -111,16 +111,19 @@ const CarCard = ({ car }) => {
           &#2547; {rent_price}
         </span>
       </div>
-      <button
-        className="py-2 w-full bg-color-black-1 text-white mt-4 rounded-md flex justify-center items-center space-x-2 font-semibold text-base group-hover/card:bg-color-pest transition-all"
-        onClick={handelBooking}
-      >
-        <AiOutlineCalendar /> <span>Rent Now</span>
-      </button>
+      {isRentButton && (
+        <button
+          className="py-2 w-full bg-color-black-1 text-white mt-4 rounded-md flex justify-center items-center space-x-2 font-semibold text-base group-hover/card:bg-color-pest transition-all"
+          onClick={handelBooking}
+        >
+          <AiOutlineCalendar /> <span>Rent Now</span>
+        </button>
+      )}
     </div>
   );
 };
 CarCard.propTypes = {
   car: PropTypes.object,
+  isRentButton: PropTypes.bool,
 };
 export default CarCard;

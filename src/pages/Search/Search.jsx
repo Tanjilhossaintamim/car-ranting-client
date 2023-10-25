@@ -20,11 +20,12 @@ const Search = () => {
     );
   }
   if (data?.results?.length > 0) {
-    content = data.results.map((car) => <CarCard key={car.id} car={car} />);
+    content = data.results.map((car) => (
+      <CarCard key={car.id} car={car} isRentButton={true} />
+    ));
   }
   return (
     <section className="py-20 bg-[#F2F7F6]">
-      
       <div
         className="max-w-6xl mx-auto grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 place-content-center px-4 lg:px-0"
         data-aos="fade-up"
