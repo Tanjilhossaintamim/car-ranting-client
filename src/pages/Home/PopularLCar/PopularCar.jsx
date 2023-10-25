@@ -1,13 +1,23 @@
 import Heading from "../../../components/shared/Heading/Heading";
 import CarCard from "../../../components/shared/CarCard/CarCard";
 import { useGetCarsQuery } from "../../../redux/features/car/carApi";
+import Skeleton from "../../../components/shared/ui/Skeleton";
 
 const PopularCar = () => {
   const { data, isLoading } = useGetCarsQuery();
   console.log(data);
   let content = null;
   if (isLoading) {
-    content = <div>loading...</div>;
+    content = (
+      <>
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+      </>
+    );
   }
   if (data?.results?.length > 0) {
     content = data.results.map((car) => <CarCard key={car.id} car={car} />);
