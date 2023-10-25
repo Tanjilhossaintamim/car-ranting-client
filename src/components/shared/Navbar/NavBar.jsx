@@ -6,13 +6,21 @@ import { FiLock } from "react-icons/fi";
 import { BiMenuAltLeft } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../redux/features/authenication/authenicationSlice";
 const NavBar = () => {
+  const { isOwner, is_loggedin } = useSelector((state) => state.auth);
   const [showSidebar, setShowSidebar] = useState(false);
   const location = useLocation();
+  const dispatch = useDispatch();
+  const userLogout = () => {
+    dispatch(logout());
+  };
 
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[location])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setShowSidebar(false);
+  }, [location]);
   return (
     <header className="bg-white py-2 sticky top-0 z-50 transition-all duration-150">
       <nav className="hidden lg:flex justify-between items-center h-16 bg-white px-8">
@@ -29,9 +37,12 @@ const NavBar = () => {
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
-            <li>
-              <NavLink to="/addCar">Add Car</NavLink>
-            </li>
+            {isOwner && (
+              <li>
+                <NavLink to="/addCar">Add Car</NavLink>
+              </li>
+            )}
+
             <li>
               <NavLink to="/myBooking">Booking List</NavLink>
             </li>
@@ -40,22 +51,33 @@ const NavBar = () => {
         {/* right */}
 
         <div className="flex items-center space-x-5">
-          <Link
-            to="/login"
-            // className="px-5 py-3 bg-color-black-1 border border-color-black-1 rounded text-white text-base font-medium text-center"
-            className="loginbtn"
-          >
-            <HiOutlineUser />
-            Sign In
-          </Link>
-          <Link
-            to="/signup"
-            // className="px-5 py-3 bg-color-orange border border-color-orange rounded text-white text-base font-medium text-center"
-            className="signup"
-          >
-            <FiLock />
-            Sign Up
-          </Link>
+          {!is_loggedin ? (
+            <>
+              <Link
+                to="/login"
+                // className="px-5 py-3 bg-color-black-1 border border-color-black-1 rounded text-white text-base font-medium text-center"
+                className="loginbtn"
+              >
+                <HiOutlineUser />
+                Sign In
+              </Link>
+              <Link
+                to="/signup"
+                // className="px-5 py-3 bg-color-orange border border-color-orange rounded text-white text-base font-medium text-center"
+                className="signup"
+              >
+                <FiLock />
+                Sign Up
+              </Link>
+            </>
+          ) : (
+            <span
+              className="loginbtn cursor-pointer"
+              onClick={() => userLogout()}
+            >
+              Logout
+            </span>
+          )}
         </div>
       </nav>
       {/* for mobile */}
@@ -94,26 +116,42 @@ const NavBar = () => {
                   Home
                 </NavLink>
               </li>
-              <li className="py-2 text-white border-b border-[#828282]">
-                <NavLink to="/addCar" className="px-2">
-                  Add Car
-                </NavLink>
-              </li>
+              {isOwner && (
+                <li className="py-2 text-white border-b border-[#828282]">
+                  <NavLink to="/addCar" className="px-2">
+                    Add Car
+                  </NavLink>
+                </li>
+              )}
+
               <li className="py-2 text-white border-b border-[#828282]">
                 <NavLink to="/myBooking" className="px-2">
                   Booking List
                 </NavLink>
               </li>
-              <li className="py-2 text-white border-b border-[#828282]">
-                <NavLink to="/login" className="px-2">
-                  Sign In
-                </NavLink>
-              </li>
-              <li className="py-2 text-white">
-                <NavLink to="/signup" className="px-2">
-                  Sign Up
-                </NavLink>
-              </li>
+              {!is_loggedin ? (
+                <>
+                  <li className="py-2 text-white border-b border-[#828282]">
+                    <NavLink to="/login" className="px-2">
+                      Sign In
+                    </NavLink>
+                  </li>
+                  <li className="py-2 text-white">
+                    <NavLink to="/signup" className="px-2">
+                      Sign Up
+                    </NavLink>
+                  </li>
+                </>
+              ) : (
+                <li className="py-2 text-white">
+                  <span
+                    className="px-2 cursor-pointer"
+                    onClick={() => userLogout()}
+                  >
+                    Logout
+                  </span>
+                </li>
+              )}
             </ul>
           </div>
         </div>

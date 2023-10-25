@@ -6,10 +6,12 @@ const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://car-ranting-server.onrender.com/api",
 
-    prepareHeaders: (headers) => {
+    prepareHeaders: (headers, { endpoint }) => {
       const token = Cookies.get("token");
       headers.set("Content-Type", "application/json");
-      headers.set("Authorization", `JWT ${token}`);
+      if (!["signUp", "login"].includes(endpoint)) {
+        headers.set("Authorization", `JWT ${token}`);
+      }
       return headers;
     },
   }),
