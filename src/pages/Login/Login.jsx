@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signInSchema } from "../../utils/schema";
 import { useLoginMutation } from "../../redux/features/authenication/authenicationApi";
 import { useEffect } from "react";
@@ -9,6 +9,7 @@ import LoadingBtn from "../../components/shared/ui/LoadingBtn";
 const Login = () => {
   const [login, { error, isError, isSuccess, isLoading }] = useLoginMutation();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (isError) {
@@ -17,9 +18,10 @@ const Login = () => {
       toast.error(message);
     } else if (isSuccess) {
       toast.success("successfully logged in !");
-      navigate("/");
+      navigate(location.state ? location.state : "/");
     }
-  }, [error?.data, isError, isSuccess, navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isError, isSuccess, navigate]);
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
