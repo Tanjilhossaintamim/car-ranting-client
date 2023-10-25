@@ -16,7 +16,7 @@ const authApi = api.injectEndpoints({
     }),
     login: builder.mutation({
       query: (data) => ({
-        url: "/auth/jwt/create",
+        url: "/auth/jwt/create/",
         method: "POST",
         body: data,
       }),

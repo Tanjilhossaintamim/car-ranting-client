@@ -2,9 +2,11 @@ import Heading from "../../../components/shared/Heading/Heading";
 import CarCard from "../../../components/shared/CarCard/CarCard";
 import { useGetCarsQuery } from "../../../redux/features/car/carApi";
 import Skeleton from "../../../components/shared/ui/Skeleton";
+import { useState } from "react";
 
 const PopularCar = () => {
-  const { data, isLoading } = useGetCarsQuery();
+  const [page, setPage] = useState(1);
+  const { data, isLoading } = useGetCarsQuery(page);
   console.log(data);
   let content = null;
   if (isLoading) {
@@ -33,6 +35,24 @@ const PopularCar = () => {
         data-aos="fade-up"
       >
         {content}
+      </div>
+      <div className="flex justify-end items-center space-x-4 mr-10 mt-6">
+        {data?.next && (
+          <button
+            className="bg-green-500 text-white px-4 py-2 rounded"
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            Next
+          </button>
+        )}
+        {data?.previous && (
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            Previous
+          </button>
+        )}
       </div>
     </section>
   );

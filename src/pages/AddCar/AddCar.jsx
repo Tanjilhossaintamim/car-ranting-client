@@ -1,20 +1,44 @@
 import { useFormik } from "formik";
+import { useAddCarMutation } from "../../redux/features/car/carApi";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const AddCar = () => {
-  const { values, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: {
-      name: "",
-      brand: "",
-      image: "",
-      from: "",
-      to: "",
-      price: "",
-    },
+  const [addCar, { isSuccess, isError }] = useAddCarMutation();
 
-    onSubmit: (values) => {
-      console.log(values);
-    },
-  });
+  const { values, handleBlur, handleChange, handleSubmit, handleReset } =
+    useFormik({
+      initialValues: {
+        name: "",
+        brand: "",
+        image: "",
+        from: "",
+        to: "",
+        price: "",
+      },
+
+      onSubmit: (values) => {
+        const { name, brand, image, from, to, price } = values;
+        const carData = {
+          name,
+          brand,
+          service_area: from,
+          service_area_to: to,
+          rent_price: price,
+          image_url: image,
+        };
+        addCar(carData);
+      },
+    });
+  useEffect(() => {
+    if (isError) {
+      toast.error("some thing wrong try again !");
+    } else if (isSuccess) {
+      toast.success("car added successfully !");
+      handleReset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, isError]);
   return (
     <section className="py-10 bg-gray-400">
       {/* <!-- component --> */}
