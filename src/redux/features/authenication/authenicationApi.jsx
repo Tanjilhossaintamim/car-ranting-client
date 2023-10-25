@@ -1,6 +1,7 @@
+import Cookies from "js-cookie";
 import fetchCurrentUser from "../../../utils/fetchUser";
 import api from "../api/api";
-import { setToken, setUser } from "./authenicationSlice";
+import { setIsLoggedIn, setUser } from "./authenicationSlice";
 
 const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
@@ -24,18 +25,14 @@ const authApi = api.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           if (data?.access) {
-            dispatch(setToken(data.access));
-            // dispatch(api.endpoints.getCurrentUser.initiate())
-            //   .unwrap()
-            //   .then((res) => {
-            //     dispatch(setUser(res));
-            //     console.log(res);
-            //   })
-            //   .catch((error) => console.log(error));
+            dispatch(setIsLoggedIn(true));
+            Cookies.set("token", data.access, { expires: 1, secure: true });
 
             const user = await fetchCurrentUser(data.access);
             if (user?.id) {
-              dispatch(setUser(user));
+              Cookies.set("user", JSON.stringify(user));
+
+              dispatch(setUser(user?.is_owner ? true : false));
             }
           }
         } catch (error) {

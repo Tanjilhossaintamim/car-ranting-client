@@ -3,11 +3,11 @@ import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const ExtraProtectedroute = ({ children }) => {
-  const { token, user } = useSelector((state) => state.auth);
-  return token && user?.is_owner ? (
+  const { is_loggedin, isOwner } = useSelector((state) => state.auth);
+  return is_loggedin && isOwner ? (
     children
   ) : (
-    <Navigate to={token ? "/" : "/login"}></Navigate>
+    <Navigate to={"/login"}></Navigate>
   );
 };
 ExtraProtectedroute.propTypes = {

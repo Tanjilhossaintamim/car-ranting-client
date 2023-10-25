@@ -1,13 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import Cookies from "js-cookie";
 
 const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://car-ranting-server.onrender.com/api",
 
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers) => {
+      const token = Cookies.get("token");
       headers.set("Content-Type", "application/json");
-      headers.set("Authorization", `JWT ${getState().auth.token}`);
+      headers.set("Authorization", `JWT ${token}`);
       return headers;
     },
   }),
