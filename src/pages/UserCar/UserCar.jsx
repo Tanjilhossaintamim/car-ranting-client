@@ -7,7 +7,7 @@ import { useGetOwnerCarQuery } from "../../redux/features/car/carApi";
 const UserCar = () => {
   const [page, setPage] = useState(1);
 
-  const { data, isLoading } = useGetOwnerCarQuery(page);
+  const { data, isLoading, isError } = useGetOwnerCarQuery(page);
 
   let content = null;
   if (isLoading) {
@@ -24,6 +24,24 @@ const UserCar = () => {
   }
   if (data?.results?.length > 0) {
     content = data.results.map((car) => <CarCard key={car.id} car={car} />);
+  }
+  if (data?.results?.length == 0) {
+    content = (
+      <div>
+        <h1 className="text-2xl font-bold text-center text-color-black">
+          You did not add car yet !
+        </h1>
+      </div>
+    );
+  }
+  if (isError) {
+    content = (
+      <div>
+        <h1 className="text-2xl font-bold text-center text-color-black">
+          Some thing wrong refresh again !
+        </h1>
+      </div>
+    );
   }
   return (
     <section className="py-20 bg-[#F2F7F6]">
