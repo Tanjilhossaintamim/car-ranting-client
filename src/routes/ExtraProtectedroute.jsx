@@ -3,7 +3,11 @@ import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const ExtraProtectedroute = ({ children }) => {
-  const { is_loggedin, isOwner } = useSelector((state) => state.auth);
+  const { is_loggedin, isOwner, loading } = useSelector((state) => state.auth);
+  if (loading) {
+    return <div>loading...</div>;
+  }
+
   return is_loggedin && isOwner ? (
     children
   ) : (
