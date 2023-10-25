@@ -5,6 +5,9 @@ const carApi = api.injectEndpoints({
     getCars: builder.query({
       query: (page) => `/cars/?page=${page}`,
     }),
+    getSearchCar: builder.query({
+      query: (value) => `/cars/?search=${value}`,
+    }),
     addCar: builder.mutation({
       query: (data) => ({
         url: "/cars/",
@@ -29,4 +32,5 @@ const carApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetCarsQuery, useAddCarMutation } = carApi;
+export const { useGetCarsQuery, useAddCarMutation, useGetSearchCarQuery } =
+  carApi;

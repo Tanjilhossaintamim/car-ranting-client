@@ -1,24 +1,36 @@
 import { AiOutlineSearch } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 const CarPicker = () => {
+  const navigate = useNavigate();
+  const handelPickCar = (e) => {
+    e.preventDefault();
+    const from = e.target.from.value;
+    navigate(`/destination/${from}`);
+  };
   return (
-    <div className="lg:w-3/4 mx-auto bg-white shadow flex items-center rounded-md py-9 lg:absolute top-3/4 right-40" data-aos="fade-up">
-      <form className="w-full lg:w-auto mx-auto flex flex-col lg:flex-row items-center justify-center space-y-4 lg:space-y-0 lg:justify-between lg:space-x-10 flex-wrap">
+    <div
+      className="lg:w-3/4 mx-auto bg-white shadow flex items-center rounded-md py-9 lg:absolute top-3/4 right-40 z-30"
+      data-aos="fade-up"
+    >
+      <form
+        onSubmit={handelPickCar}
+        className="w-full lg:w-auto mx-auto flex flex-col lg:flex-row items-center justify-center space-y-4 lg:space-y-0 lg:justify-between lg:space-x-10 flex-wrap"
+      >
         <div className="flex flex-col space-y-1 w-3/4 lg:w-auto">
           <p className="text-sm font-bold text-color-black">Destination From</p>
           <div className="bg-[#FCFBFB]  border border-[#f4f4f4] rounded">
             <select
               name="from"
-              id=""
               className="px-10 py-2 bg-[#FCFBFB] text-color-black"
               required
             >
               <option value="" hidden>
                 Please select
               </option>
+
               <option>Mirpur</option>
+              <option>Gulistan</option>
               <option>Farmgate</option>
-              <option>Mohakhali</option>
-              <option>Banani</option>
             </select>
           </div>
         </div>
@@ -27,17 +39,15 @@ const CarPicker = () => {
           <div className="bg-[#FCFBFB]  border border-[#f4f4f4] rounded">
             <select
               name="to"
-              id=""
               className="px-10 py-2 bg-[#FCFBFB] text-color-black"
               required
             >
               <option value="" hidden>
                 Please select
               </option>
-              <option>Mirpur</option>
-              <option>Farmgate</option>
+              <option>Rampura</option>
               <option>Mohakhali</option>
-              <option>Banani</option>
+              <option>Bannai</option>
             </select>
           </div>
         </div>

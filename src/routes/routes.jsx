@@ -8,6 +8,7 @@ import ExtraProtectedroute from "./ExtraProtectedroute";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import BookingList from "../pages/BookingList/BookingList";
+import Search from "../pages/Search/Search";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
             <BookingList />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/destination/:name",
+        element: <Search />,
       },
     ],
   },

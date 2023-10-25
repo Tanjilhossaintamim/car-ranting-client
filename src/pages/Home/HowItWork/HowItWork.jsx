@@ -10,7 +10,7 @@ const HowItWork = () => {
         title="How It Works"
         description="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"
       />
-      <div>
+      <div className="z-10">
         <div
           className="max-w-6xl mx-auto flex items-center flex-wrap justify-between relative"
           data-aos="fade-up"
@@ -34,7 +34,7 @@ const HowItWork = () => {
             color={"#212529"}
           />
         </div>
-        <img src={RightImg} alt="" className="absolute right-0 top-[600px]" />
+        <img src={RightImg} alt="" className="absolute right-0 top-[800px] z-0 lg:top-[600px]" />
       </div>
     </section>
   );
