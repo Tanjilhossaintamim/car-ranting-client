@@ -8,7 +8,7 @@ const authApi = api.injectEndpoints({
     signUp: builder.mutation({
       query: (data) => {
         return {
-          url: "/auth/users/",
+          url: "/auth/register/",
           method: "POST",
           body: JSON.stringify(data),
         };
@@ -16,7 +16,7 @@ const authApi = api.injectEndpoints({
     }),
     login: builder.mutation({
       query: (data) => ({
-        url: "/auth/jwt/create/",
+        url: "/auth/login",
         method: "POST",
         body: data,
       }),
@@ -29,7 +29,7 @@ const authApi = api.injectEndpoints({
             Cookies.set("token", data.access, { expires: 1, secure: true });
 
             const user = await fetchCurrentUser(data.access);
-            if (user?.id) {
+            if (user?._id) {
               Cookies.set("user", JSON.stringify(user));
 
               dispatch(setUser(user?.is_owner ? true : false));
@@ -41,7 +41,11 @@ const authApi = api.injectEndpoints({
       },
     }),
     getCurrentUser: builder.query({
-      query: () => "/auth/users/me",
+      query: () => ({
+        url: "/auth/users/me",
+        method: "GET",
+        cache: "no-store",
+      }),
       keepUnusedDataFor: 0.001,
     }),
   }),

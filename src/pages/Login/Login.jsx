@@ -7,18 +7,23 @@ import toast from "react-hot-toast";
 import LoadingBtn from "../../components/shared/ui/LoadingBtn";
 
 const Login = () => {
-  const [login, { error, isError, isSuccess, isLoading }] = useLoginMutation();
+  const [login, { data, error, isError, isSuccess, isLoading }] =
+    useLoginMutation();
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     if (isError) {
-      const key = Object.keys(error?.data)[0];
-      const message = error?.data[key];
+      const message = error.data?.message;
+      console.log(message);
       toast.error(message);
-    } else if (isSuccess) {
-      toast.success("successfully logged in !");
-      navigate(location.state ? location.state : "/");
+    }
+    if (isSuccess) {
+      if (data?._id) {
+        toast.success("login successfully !");
+
+        navigate(location.state ? location.state : "/");
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, isSuccess, navigate]);

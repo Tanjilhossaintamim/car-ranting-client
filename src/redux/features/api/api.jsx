@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://car-ranting-server.onrender.com/api",
+    baseUrl: "http://localhost:3000",
 
     prepareHeaders: (headers, { endpoint }) => {
       const token = Cookies.get("token");

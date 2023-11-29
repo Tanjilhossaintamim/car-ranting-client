@@ -4,6 +4,7 @@ import useAuthCheck from "./hooks/useAuthCheck";
 
 const App = () => {
   useAuthCheck();
+  console.log("render");
 
   return <RouterProvider router={router} />;
 };

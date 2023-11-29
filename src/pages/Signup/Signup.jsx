@@ -32,9 +32,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (isError) {
-      const key = Object.keys((error && error.data) || { name: "tamim" })[0];
-      const message = error?.data[key][0];
-      toast.error(message);
+      toast.error(error.data?.message);
     } else if (isSuccess) {
       toast.success("account created successfully!");
       navigate("/login");

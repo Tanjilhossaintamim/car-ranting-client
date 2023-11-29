@@ -1,18 +1,18 @@
 const fetchCurrentUser = async (token) => {
-    try {
-        const res = await fetch("https://car-ranting-server.onrender.com/api/auth/users/me", {
-            method: 'GET',
-            headers: {
-                Authorization: `JWT ${token}`
-            }
-        });
+  try {
+    const res = await fetch("http://localhost:3000/auth/users/me", {
+      method: "GET",
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+    });
 
-        const data = await res.json();
+    const data = await res.json();
 
-        return data;
-    } catch (error) {
-        console.log(error);
-        return {};
-    }
+    return data;
+  } catch (error) {
+    console.log(error);
+    return {};
+  }
 };
 export default fetchCurrentUser;
