@@ -3,7 +3,7 @@ import api from "../api/api";
 const carApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getCars: builder.query({
-      query: (page) => `/cars/?page=${page}`,
+      query: (page) => `/cars?page=${page}`,
     }),
     getSearchCar: builder.query({
       query: (value) => `/cars/?search=${value}`,
@@ -20,10 +20,12 @@ const carApi = api.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const { data } = await queryFulfilled;
-          if (data?.id) {
+
+          if (data?._id) {
             dispatch(
               api.util.updateQueryData("getCars", 1, (draft) => {
-                draft.results.push(data);
+                draft.totalCar = parseInt(draft.totalCar) + 1;
+                draft.cars.push(data);
               })
             );
           }
@@ -35,5 +37,9 @@ const carApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetCarsQuery, useAddCarMutation, useGetSearchCarQuery,useGetOwnerCarQuery } =
-  carApi;
+export const {
+  useGetCarsQuery,
+  useAddCarMutation,
+  useGetSearchCarQuery,
+  useGetOwnerCarQuery,
+} = carApi;

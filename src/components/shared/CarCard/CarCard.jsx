@@ -73,7 +73,7 @@ const CarCard = ({ car, isRentButton }) => {
         <img
           src={image_url}
           alt=""
-          className="w-full hover:scale-110 transition-all duration-700 rounded-md object-cover"
+          className="w-full h-60 object-center hover:scale-110 transition-all duration-700 rounded-md object-cover"
         />
         <h1 className="absolute top-5 left-5 bg-white rounded-md px-3 py-1 text-color-gray">
           {brand}

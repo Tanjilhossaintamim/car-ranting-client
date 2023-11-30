@@ -12,7 +12,7 @@ const Home = () => {
       <Banner />
       <CarPicker />
       <HowItWork />
-      {/* <PopularCar /> */}
+      <PopularCar />
       <WhyChooseUs />
     </div>
   );

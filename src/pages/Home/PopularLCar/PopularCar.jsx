@@ -3,10 +3,12 @@ import CarCard from "../../../components/shared/CarCard/CarCard";
 import { useGetCarsQuery } from "../../../redux/features/car/carApi";
 import Skeleton from "../../../components/shared/ui/Skeleton";
 import { useState } from "react";
+import ResponsivePagination from "react-responsive-pagination";
 
 const PopularCar = () => {
-  const [page, setPage] = useState(1);
-  const { data, isLoading } = useGetCarsQuery(page);
+  const [currentPage, setcurrentPage] = useState(1);
+  const { data, isLoading } = useGetCarsQuery(currentPage);
+  const totalPage = Math.ceil(data?.totalCar / 6);
 
   let content = null;
   if (isLoading) {
@@ -21,9 +23,9 @@ const PopularCar = () => {
       </>
     );
   }
-  if (data?.results?.length > 0) {
-    content = data.results.map((car) => (
-      <CarCard key={car.id} car={car} isRentButton={true} />
+  if (data?.cars?.length > 0) {
+    content = data.cars.map((car) => (
+      <CarCard key={car._id} car={car} isRentButton={true} />
     ));
   }
   return (
@@ -38,24 +40,15 @@ const PopularCar = () => {
       >
         {content}
       </div>
-      <div className="flex justify-end items-center space-x-4 mr-10 mt-6">
-        {data?.next && (
-          <button
-            className="bg-green-500 text-white px-4 py-2 rounded"
-            onClick={() => setPage((prev) => prev + 1)}
-          >
-            Next
-          </button>
-        )}
-        {data?.previous && (
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-            onClick={() => setPage((prev) => prev - 1)}
-          >
-            Previous
-          </button>
-        )}
-      </div>
+      {data?.cars?.length > 0 && (
+        <div className="mt-10">
+          <ResponsivePagination
+            total={totalPage}
+            current={currentPage}
+            onPageChange={(page) => setcurrentPage(page)}
+          />
+        </div>
+      )}
     </section>
   );
 };
