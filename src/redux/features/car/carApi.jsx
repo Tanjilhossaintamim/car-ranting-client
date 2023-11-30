@@ -6,7 +6,7 @@ const carApi = api.injectEndpoints({
       query: (page) => `/cars?page=${page}`,
     }),
     getSearchCar: builder.query({
-      query: (value) => `/cars/?search=${value}`,
+      query: (value) => `/cars/search${value}`,
     }),
     getOwnerCar: builder.query({
       query: (page) => `/usercars/?page=${page}`,

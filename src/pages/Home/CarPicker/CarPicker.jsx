@@ -5,7 +5,8 @@ const CarPicker = () => {
   const handelPickCar = (e) => {
     e.preventDefault();
     const from = e.target.from.value;
-    navigate(`/destination/${from}`);
+    const to = e.target.to.value;
+    navigate(`/destination?from=${from}&to=${to}`);
   };
   return (
     <div

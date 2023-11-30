@@ -1,11 +1,13 @@
-import { useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useGetSearchCarQuery } from "../../redux/features/car/carApi";
 import Skeleton from "../../components/shared/ui/Skeleton";
 import CarCard from "../../components/shared/CarCard/CarCard";
 
 const Search = () => {
-  const { name } = useParams();
-  const { data, isLoading } = useGetSearchCarQuery(name);
+  const [searchParams] = useSearchParams();
+  const url = `?from=${searchParams.get("from")}&to=${searchParams.get("to")}`;
+  const { data, isLoading } = useGetSearchCarQuery(url);
+
   let content = null;
   if (isLoading) {
     content = (
@@ -19,12 +21,13 @@ const Search = () => {
       </>
     );
   }
-  if (data?.results?.length > 0) {
-    content = data.results.map((car) => (
-      <CarCard key={car.id} car={car} isRentButton={true} />
+  if (data?.cars?.length == 0) content = <h1 className="text-xl font-bold">No Car Found !</h1>;
+  if (data?.cars?.length > 0) {
+    content = data.cars.map((car) => (
+      <CarCard key={car._id} car={car} isRentButton={true} />
     ));
   }
-  document.title = `Dreams Rent |${name}`;
+  document.title = `Dreams Rent |Search`;
 
   return (
     <section className="py-20 bg-[#F2F7F6]">
@@ -34,24 +37,6 @@ const Search = () => {
       >
         {content}
       </div>
-      {/* <div className="flex justify-end items-center space-x-4 mr-10 mt-6">
-        {data?.next && (
-          <button
-            className="bg-green-500 text-white px-4 py-2 rounded"
-            onClick={() => setPage((prev) => prev + 1)}
-          >
-            Next
-          </button>
-        )}
-        {data?.previous && (
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-            onClick={() => setPage((prev) => prev - 1)}
-          >
-            Previous
-          </button>
-        )}
-      </div> */}
     </section>
   );
 };
