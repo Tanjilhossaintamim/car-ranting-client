@@ -10,10 +10,7 @@ const api = createApi({
       const token = Cookies.get("token");
       headers.set("Content-Type", "application/json");
       if (!["signUp", "login", "getCars", "getSearchCar"].includes(endpoint)) {
-        console.log(endpoint);
         headers.set("Authorization", `JWT ${token}`);
-      } else {
-        console.log(endpoint);
       }
       return headers;
     },

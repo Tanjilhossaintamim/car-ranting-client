@@ -11,7 +11,16 @@ const MainLayout = () => {
   }, []);
   return (
     <div className="font-fira-sans">
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          success: {
+            duration: 1500,
+          },
+          error: {
+            duration: 1500,
+          },
+        }}
+      />
       <NavBar />
       <Outlet />
       <Footer />

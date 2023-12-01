@@ -15,13 +15,15 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useDeleteCarMutation } from "../../../redux/features/car/carApi";
 const CarCard = ({ car, isRentButton, isDeleteButton = false }) => {
   const { is_loggedin } = useSelector((state) => state.auth);
   const [placeBooking, { isSuccess, isError, error }] =
     usePlaceBookingMutation();
+  const [deleteCar] = useDeleteCarMutation();
   const navigate = useNavigate();
   const {
-    id,
+    _id,
     name,
     brand,
     service_area,
@@ -39,7 +41,7 @@ const CarCard = ({ car, isRentButton, isDeleteButton = false }) => {
       showLoaderOnConfirm: true,
     });
     if (phone) {
-      const bookingInfo = { car_id: id, phone: phone };
+      const bookingInfo = { car_id: _id, phone: phone };
       if (is_loggedin) {
         placeBooking(bookingInfo);
       } else {
@@ -63,7 +65,26 @@ const CarCard = ({ car, isRentButton, isDeleteButton = false }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, isSuccess]);
-
+  const handelDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteCar(_id);
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
+  };
   return (
     <div
       className="group/card bg-white rounded-md p-4 cursor-pointer transition-all"
@@ -129,7 +150,7 @@ const CarCard = ({ car, isRentButton, isDeleteButton = false }) => {
           </button>
           <button
             className="py-2 w-1/2 bg-red-600 text-white mt-4 rounded-md flex justify-center items-center space-x-2 font-semibold text-base  transition-all"
-            onClick={handelBooking}
+            onClick={handelDelete}
           >
             <AiFillDelete /> <span>Delete</span>
           </button>

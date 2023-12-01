@@ -28,9 +28,35 @@ const carApi = api.injectEndpoints({
                 draft.cars.push(data);
               })
             );
+            dispatch(
+              api.util.updateQueryData("getOwnerCar", 1, (draft) => {
+                draft.count = parseInt(draft.count) + 1;
+                draft.results.push(data);
+              })
+            );
           }
         } catch (error) {
           console.log(error);
+        }
+      },
+    }),
+    deleteCar: builder.mutation({
+      query: (id) => ({
+        url: `/cars/mycar/${id}`,
+        method: "DELETE",
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        const patchResult = dispatch(
+          api.util.updateQueryData("getOwnerCar", 1, (draft) => {
+            const carId = draft.results.map((car) => car._id);
+            const index = carId.indexOf(arg);
+            draft.results.splice(index, 1);
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch (error) {
+          patchResult.undo();
         }
       },
     }),
@@ -42,4 +68,5 @@ export const {
   useAddCarMutation,
   useGetSearchCarQuery,
   useGetOwnerCarQuery,
+  useDeleteCarMutation,
 } = carApi;
