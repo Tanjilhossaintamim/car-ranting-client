@@ -10,12 +10,13 @@ import sitimg from "../../../assets/car-parts-06.svg";
 import Part from "./Part";
 import PropTypes from "prop-types";
 import { usePlaceBookingMutation } from "../../../redux/features/booking/bookingApi";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useDeleteCarMutation } from "../../../redux/features/car/carApi";
+import FormDialog from "../Modal/Modal";
 const CarCard = ({ car, isRentButton, isDeleteButton = false }) => {
   const { is_loggedin } = useSelector((state) => state.auth);
   const [placeBooking, { isSuccess, isError, error }] =
@@ -31,6 +32,8 @@ const CarCard = ({ car, isRentButton, isDeleteButton = false }) => {
     rent_price,
     image_url,
   } = car || {};
+  // modal funtion
+  const [open, setOpen] = useState(false);
   const handelBooking = async () => {
     const { value: phone } = await Swal.fire({
       title: "Give Your Phone Number",
@@ -144,7 +147,7 @@ const CarCard = ({ car, isRentButton, isDeleteButton = false }) => {
         <div className="flex items-center space-x-4">
           <button
             className="py-2 w-1/2 bg-green-600 text-white mt-4 rounded-md flex justify-center items-center space-x-2 font-semibold text-base  transition-all"
-            onClick={handelBooking}
+            onClick={() => setOpen(true)}
           >
             <AiFillEdit /> <span>Edit</span>
           </button>
@@ -156,6 +159,7 @@ const CarCard = ({ car, isRentButton, isDeleteButton = false }) => {
           </button>
         </div>
       )}
+      <FormDialog open={open} car={car} setOpen={setOpen} />
     </div>
   );
 };

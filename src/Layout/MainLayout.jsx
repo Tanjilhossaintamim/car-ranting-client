@@ -21,6 +21,7 @@ const MainLayout = () => {
           },
         }}
       />
+
       <NavBar />
       <Outlet />
       <Footer />

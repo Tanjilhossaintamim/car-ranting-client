@@ -64,24 +64,7 @@ const UserCar = () => {
       >
         {content}
       </div>
-      <div className="flex justify-end items-center space-x-4 mr-10 mt-6">
-        {data?.next && (
-          <button
-            className="bg-green-500 text-white px-4 py-2 rounded"
-            onClick={() => setPage((prev) => prev + 1)}
-          >
-            Next
-          </button>
-        )}
-        {data?.previous && (
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-            onClick={() => setPage((prev) => prev - 1)}
-          >
-            Previous
-          </button>
-        )}
-      </div>
+
       {data?.results?.length > 0 && (
         <ResponsivePagination
           total={totalPage}
