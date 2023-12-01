@@ -9,7 +9,7 @@ const carApi = api.injectEndpoints({
       query: (value) => `/cars/search${value}`,
     }),
     getOwnerCar: builder.query({
-      query: (page) => `/usercars/?page=${page}`,
+      query: (page) => `/cars/mycar?page=${page}`,
     }),
     addCar: builder.mutation({
       query: (data) => ({

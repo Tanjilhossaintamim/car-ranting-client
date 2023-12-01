@@ -1,6 +1,6 @@
 import { HiStar } from "react-icons/hi";
 import { CiLocationOn } from "react-icons/ci";
-import { AiOutlineCalendar } from "react-icons/ai";
+import { AiFillDelete, AiFillEdit, AiOutlineCalendar } from "react-icons/ai";
 import autoimg from "../../../assets/car-parts-01.svg";
 import meterimg from "../../../assets/car-parts-02.svg";
 import fuelimg from "../../../assets/car-parts-03.svg";
@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-const CarCard = ({ car, isRentButton }) => {
+const CarCard = ({ car, isRentButton, isDeleteButton = false }) => {
   const { is_loggedin } = useSelector((state) => state.auth);
   const [placeBooking, { isSuccess, isError, error }] =
     usePlaceBookingMutation();
@@ -119,11 +119,28 @@ const CarCard = ({ car, isRentButton }) => {
           <AiOutlineCalendar /> <span>Rent Now</span>
         </button>
       )}
+      {isDeleteButton && (
+        <div className="flex items-center space-x-4">
+          <button
+            className="py-2 w-1/2 bg-green-600 text-white mt-4 rounded-md flex justify-center items-center space-x-2 font-semibold text-base  transition-all"
+            onClick={handelBooking}
+          >
+            <AiFillEdit /> <span>Edit</span>
+          </button>
+          <button
+            className="py-2 w-1/2 bg-red-600 text-white mt-4 rounded-md flex justify-center items-center space-x-2 font-semibold text-base  transition-all"
+            onClick={handelBooking}
+          >
+            <AiFillDelete /> <span>Delete</span>
+          </button>
+        </div>
+      )}
     </div>
   );
 };
 CarCard.propTypes = {
   car: PropTypes.object,
   isRentButton: PropTypes.bool,
+  isDeleteButton: PropTypes.bool,
 };
 export default CarCard;

@@ -3,11 +3,12 @@ import CarCard from "../../components/shared/CarCard/CarCard";
 import Heading from "../../components/shared/Heading/Heading";
 import Skeleton from "../../components/shared/ui/Skeleton";
 import { useGetOwnerCarQuery } from "../../redux/features/car/carApi";
+import ResponsivePagination from "react-responsive-pagination";
 
 const UserCar = () => {
-  const [page, setPage] = useState(1);
-
-  const { data, isLoading, isError } = useGetOwnerCarQuery(page);
+  const [currentPage, setPage] = useState(1);
+  const { data, isLoading, isError } = useGetOwnerCarQuery(currentPage);
+  const totalPage = Math.ceil(data?.count / 6);
 
   let content = null;
   if (isLoading) {
@@ -23,7 +24,14 @@ const UserCar = () => {
     );
   }
   if (data?.results?.length > 0) {
-    content = data.results.map((car) => <CarCard key={car.id} car={car} />);
+    content = data.results.map((car) => (
+      <CarCard
+        key={car._id}
+        car={car}
+        isRentButton={false}
+        isDeleteButton={true}
+      />
+    ));
   }
   if (data?.results?.length == 0) {
     content = (
@@ -74,6 +82,13 @@ const UserCar = () => {
           </button>
         )}
       </div>
+      {data?.results?.length > 0 && (
+        <ResponsivePagination
+          total={totalPage}
+          current={currentPage}
+          onPageChange={(page) => setPage(page)}
+        />
+      )}
     </section>
   );
 };
