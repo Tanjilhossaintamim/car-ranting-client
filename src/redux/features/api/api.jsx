@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000",
+    baseUrl: "https://dreamrent-server.vercel.app",
 
     prepareHeaders: (headers, { endpoint }) => {
       const token = Cookies.get("token");

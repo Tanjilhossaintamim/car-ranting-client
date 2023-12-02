@@ -1,6 +1,6 @@
 const fetchCurrentUser = async (token) => {
   try {
-    const res = await fetch("http://localhost:3000/auth/users/me", {
+    const res = await fetch("https://dreamrent-server.vercel.app/auth/users/me", {
       method: "GET",
       headers: {
         Authorization: `JWT ${token}`,
