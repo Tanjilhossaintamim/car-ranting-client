@@ -1,11 +1,8 @@
+import moment from "moment/moment";
 import { useGetBookingsQuery } from "../../redux/features/booking/bookingApi";
 
 const BookingList = () => {
-  const {
-    data: bookingList,
-    isError,
-    isLoading,
-  } = useGetBookingsQuery(undefined, { refetchOnMountOrArgChange: true });
+  const { data: bookingList, isError, isLoading } = useGetBookingsQuery();
   let content = null;
   if (isLoading) {
     content = <div>Loading...</div>;
@@ -16,7 +13,6 @@ const BookingList = () => {
     );
   }
   if (bookingList?.length > 0) {
-    console.log(bookingList);
     content = (
       <div className="container mx-auto p-6 font-mono">
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
@@ -32,7 +28,7 @@ const BookingList = () => {
               </thead>
               <tbody className="bg-white">
                 {bookingList.map((list) => {
-                  const car = list.car;
+                  const car = list.car[0];
                   const {
                     name,
                     brand,
@@ -42,7 +38,7 @@ const BookingList = () => {
                     rent_price,
                   } = car;
                   return (
-                    <tr key={list.id} className="text-gray-700">
+                    <tr key={list._id} className="text-gray-700">
                       <td className="px-4 py-3 border">
                         <div className="flex items-center text-sm">
                           <div className="relative w-8 h-8 mr-3 rounded-full md:block">
@@ -73,7 +69,7 @@ const BookingList = () => {
                         </span>
                       </td>
                       <td className="px-4 py-3 text-sm border">
-                        {list.bookingDate}
+                        {moment(list.bookingDate).format("DD MMMM YYYY")}
                       </td>
                     </tr>
                   );

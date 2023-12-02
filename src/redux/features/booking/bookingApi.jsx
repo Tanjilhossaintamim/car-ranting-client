@@ -3,14 +3,16 @@ import api from "../api/api";
 const bookingApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getBookings: builder.query({
-      query: () => "/booking",
+      query: () => "/bookings",
+      providesTags: ["Bookings"],
     }),
     placeBooking: builder.mutation({
       query: (bookingInfo) => ({
-        url: `/booking/`,
+        url: `/bookings`,
         method: "POST",
         body: JSON.stringify(bookingInfo),
       }),
+      invalidatesTags: ["Bookings"],
     }),
   }),
 });

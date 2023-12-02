@@ -44,7 +44,7 @@ const CarCard = ({ car, isRentButton, isDeleteButton = false }) => {
       showLoaderOnConfirm: true,
     });
     if (phone) {
-      const bookingInfo = { car_id: _id, phone: phone };
+      const bookingInfo = { car: _id, phone: phone };
       if (is_loggedin) {
         placeBooking(bookingInfo);
       } else {
@@ -55,8 +55,7 @@ const CarCard = ({ car, isRentButton, isDeleteButton = false }) => {
   };
   useEffect(() => {
     if (isError) {
-      const key = Object.keys(error?.data)[0];
-      const message = error?.data[key];
+      const message = error?.data?.message;
       toast.error(message);
     } else if (isSuccess) {
       // toast.success("car booked successfully !");

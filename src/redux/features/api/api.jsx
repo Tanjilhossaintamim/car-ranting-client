@@ -15,7 +15,7 @@ const api = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Cars", "MyCars"],
+  tagTypes: ["Cars", "MyCars", "Bookings"],
   refetchOnReconnect: true,
   keepUnusedDataFor: 300,
   endpoints: () => ({}),
