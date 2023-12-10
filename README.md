@@ -1,8 +1,33 @@
-# React + Vite
+# Dream Car Rent
+<a href="https://dream-rent-car.netlify.app/" >Live Site</a>
+## Features
+- Designed and implemented a dual-role system for owners and clients.
+-  Developed an intuitive owner dashboard for efficient car management.
+-  Implemented a dynamic catalog for user-friendly car browsing.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Pakages
+- React
+- formik
+- yup
+- redux toolkit
+- react redux
+- react router dom
+- react toastify
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## How to install
+
+ ```
+git clone https://github.com/Tanjilhossaintamim/car-ranting-client.git
+```
+```
+cd car-ranting-client
+```
+```
+npm install
+```
+```
+npm run dev
+```
+
+
